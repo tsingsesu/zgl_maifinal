@@ -1,0 +1,5 @@
+my_chassisnode:
+  ros__parameters: {}
+
+my_maincontrolnode:
+  ros__parameters: {}

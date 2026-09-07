@@ -14,8 +14,8 @@ def generate_launch_description():
         Node(
             
             package='maicontrol_pkg',
-            executable='maincontrolnode',
-            name='maichassisnode',
+            executable='maichassis',
+            name='my_chassisnode',
             output='screen',
             parameters=[params_yaml],
 
@@ -23,8 +23,8 @@ def generate_launch_description():
 
         Node(
             package='maicontrol_pkg',
-            executable='subscriber',
-            name='my_subscriber',
+            executable='maimaincontrol',
+            name='my_maincontrolnode',
             parameters=[params_yaml],
             output='screen',
             
