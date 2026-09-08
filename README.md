@@ -6,6 +6,7 @@
 
 #### src
 `maicontrol_pkg`存放`chassisnode`底盘节点和`maincontrolnode`主控制节点
+`map_config`用于存放地图数据
 
 `launch`中的`robot.launch.py`文件，管理节点统一启动
 

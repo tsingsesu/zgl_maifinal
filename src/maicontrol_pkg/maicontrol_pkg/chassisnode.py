@@ -5,15 +5,15 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 
-'数值格式统一 以后涉及运动都是float'
-MAX_SPEED = 2.0
 
 class MaiChassis(Node):
     def __init__(self):
         super().__init__('Mai_chassis')
         #以下两者配合，从yaml中读值
         self.declare_parameter('feedback_hz',100.0)
+        self.declare_parameter('max_speed',2.0)
         self.feedback_hz = self.get_parameter('feedback_hz').value
+        self.max_speed = self.get_parameter('max_speed').value
 
         #订阅主控速度指令
         self.cmd_sub = self.create_subscription(Twist , 'cmd_vel' , self.cmd_callback , 10)
@@ -29,10 +29,10 @@ class MaiChassis(Node):
             self.get_logger().info('底盘收到运动停止指令，已停止')
             self.current.linear.x = 0.0
             self.current.linear.y = 0.0
-            
+
         else:
-            self.current.linear.x = max(-MAX_SPEED , min(MAX_SPEED , msg.linear.x))
-            self.current.linear.y = max(-MAX_SPEED , min(MAX_SPEED , msg.linear.y))
+            self.current.linear.x = max(-self.max_speed , min(self.max_speed , msg.linear.x))
+            self.current.linear.y = max(-self.max_speed , min(self.max_speed , msg.linear.y))
             #主控发布的速度由底盘过滤后，返回真实执行速度，而且我认为在本题中，过滤不合理的速度是底盘的唯一实际物理功能
 
     #具体回调函数，将格式与定时联系

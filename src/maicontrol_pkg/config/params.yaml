@@ -1,6 +1,8 @@
 my_chassisnode:
   ros__parameters: 
     feedback_hz: 100.0 #底盘返回实际速度的频率，其实尚不清楚底盘反馈的最佳频率，所以参数化后期方便调整
+    max_speed : 2.0 #物理层面上的最大速度，由底盘决定
+
 
 my_maincontrolnode:
   ros__parameters: 
@@ -9,4 +11,5 @@ my_maincontrolnode:
     start_point: 1 #初始位置编号
     final_point: 4 #目标/最终位置编号
     arrival_tolerance: 0.05 #到达目标点的容忍距离
+    cruise_speed: 2.5 #巡航速度，由x,y两个方向速度取模合成
 
