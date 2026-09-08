@@ -12,4 +12,5 @@ my_maincontrolnode:
     final_point: 4 #目标/最终位置编号
     arrival_tolerance: 0.05 #到达目标点的容忍距离
     cruise_speed: 2.5 #巡航速度，由x,y两个方向速度取模合成
+    brake_dist: 3.0
 
