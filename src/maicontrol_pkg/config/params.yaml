@@ -1,5 +1,12 @@
 my_chassisnode:
-  ros__parameters: {}
+  ros__parameters: 
+    feedback_hz: 100 #底盘返回实际速度的频率，其实尚不清楚底盘反馈的最佳频率，所以参数化后期方便调整
 
 my_maincontrolnode:
-  ros__parameters: {}
+  ros__parameters: 
+    control_hz: 20 #主控发布速度指令的频率
+    mode: patrol #切换机器人模式->对应任务一patrol，任务二point_to_point
+    start_point: 1 #初始位置编号
+    final_point: 4 #目标/最终位置编号
+    arrival_tolerance: 0.05 #到达目标点的容忍距离
+
