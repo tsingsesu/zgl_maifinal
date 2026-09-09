@@ -4,6 +4,10 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
+from datetime import datetime
+
+def now_str():
+    return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
 class MaiChassis(Node):
@@ -24,11 +28,17 @@ class MaiChassis(Node):
 
         self.current = Twist()# 存放当前速度信息
 
+        self.stopped = False #用于判断当前是否已经处于停止状态
+
     def cmd_callback(self , msg):
         if msg.linear.x == 0.0 and msg.linear.y == 0.0:
-            self.get_logger().info('底盘收到运动停止指令，已停止')
+            
             self.current.linear.x = 0.0
             self.current.linear.y = 0.0
+
+            if not self.stopped:#新增，防止停止日志不断刷屏
+                self.stopped = True
+                self.get_logger().info(f'[{now_str()}] 底盘收到运动停止指令，已停止')
 
         else:
             self.current.linear.x = max(-self.max_speed , min(self.max_speed , msg.linear.x))
