@@ -17,3 +17,13 @@
 #### `.gitignore`
 
 #### `README.md`
+
+### 注意
+
+<mark>我将日志中时间打印的形式从时间戳换成了时-分-秒，为使日志打印效果更好，请修改.bashrc
+
+在该文件最后插入
+
+```bash
+export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity}] [{name}]: {message}"
+```
