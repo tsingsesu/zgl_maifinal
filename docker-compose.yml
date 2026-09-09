@@ -1,1 +1,26 @@
 services:
+#定义服务集合
+  robot:
+  #服务名
+    build: 
+      context: .
+      #上下文路径：当前文件夹，表示docker构建的范围仅能是这个文件夹
+      dockerfile: Dockerfile
+      #按该文件夹中的Dockerfile文件做创建镜像的图纸
+
+    volumes:
+      - ./src:/final_app/src 
+      #挂载src 让params.yaml 修改的参数在容器内生效
+
+    image: zgl_maifinal:latest
+    container_name: maifinal_robot
+      
+    environment:
+      - "RCUTILS_CONSOLE_OUTPUT_FORMAT=[{severity}] [{name}]: {message}"
+      #让容器内日志也去掉时间戳
+      - "TZ=Asia/Shanghai"
+      #发现容器里的时间与北京时间未对准
+
+    stdin_open: true
+    tty: true
+      # 增加 -it 允许在容器内交互
